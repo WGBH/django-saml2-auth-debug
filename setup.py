@@ -1,6 +1,6 @@
-"""The setup module for django_saml2_auth.
+"""The setup module for django_saml2_auth_debug.
 See:
-https://github.com/grafana/django_saml2_auth
+https://github.com/WGBH/django-saml2-auth-debug
 """
 
 from codecs import open
@@ -17,7 +17,7 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
 requirements = [r.rstrip() for r in open("requirements.txt").readlines()]
 
 setup(
-    name="grafana_django_saml2_auth",
+    name="django_saml2_auth_debug",
 
     version="3.9.0",
 
@@ -25,13 +25,13 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
 
-    url="https://github.com/grafana/django-saml2-auth",
+    url="https://github.com/WGBH/django-saml2-auth-debug",
 
     author="Fang Li",
     author_email="surivlee+djsaml2auth@gmail.com",
 
-    maintainer="Mostafa Moradian",
-    maintainer_email="mostafa@grafana.com",
+    maintainer="Tim Kinnel",
+    maintainer_email="tim_kinnel@wgbh.orgWGBH",
 
     license="Apache 2.0",
 

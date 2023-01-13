@@ -6,7 +6,7 @@ This project is currently maintained by Mostafa Moradian and various contributor
   - [Li Fang](https://github.com/fangli)
 
 - Current maintainer:
-  - [Mostafa Moradian](https://github.com/mostafa) (k6.io & Grafana Labs)
+  - [Tim Kinnel] WGBH
 
 # Dependencies
 
