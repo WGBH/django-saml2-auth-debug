@@ -59,7 +59,10 @@ def run_hook(function_path: str,
             "status_code": 500
         })
 
+    logger = logging.getLogger(__name__)
+    logger.debug(path)
     module_path = ".".join(path[:-1])
+    
     result = None
     try:
         cls = import_module(module_path)
