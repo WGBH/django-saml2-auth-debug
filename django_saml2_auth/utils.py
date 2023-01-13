@@ -153,8 +153,10 @@ def exception_handler(
         Returns:
             HttpResponse: Rendered error page with details
         """
+        import inspect
         logger = logging.getLogger(__name__)
         logger.debug(exc)
+        logger.debug(inspect.stack()[1][3])
 
         context: Optional[Dict[str, Any]] = exc.extra if isinstance(exc, SAMLAuthError) else {}
         if isinstance(exc, SAMLAuthError) and exc.extra:
