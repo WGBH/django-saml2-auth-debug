@@ -156,7 +156,7 @@ def exception_handler(
         import inspect
         logger = logging.getLogger(__name__)
         logger.debug(exc)
-        logger.debug(inspect.stack())
+        logger.debug(inspect.trace())
 
         context: Optional[Dict[str, Any]] = exc.extra if isinstance(exc, SAMLAuthError) else {}
         if isinstance(exc, SAMLAuthError) and exc.extra:
