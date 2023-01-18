@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 
 """Endpoints for SAML SSO login"""
+import logging
 
 import urllib.parse as urlparse
 from typing import Optional, Union
@@ -240,7 +241,13 @@ def signin(request: HttpRequest) -> HttpResponseRedirect:
     Returns:
         HttpResponseRedirect: Redirect to the IdP login endpoint
     """
+
+    logger = logging.getLogger(__name__)
+
     saml2_auth_settings = settings.SAML2_AUTH
+
+    logger.debug("--- saml2_auth_settings ---")
+    logger.debug(saml2_auth_settings)
 
     next_url = request.GET.get("next") or get_default_next_url()
     if not next_url:
@@ -268,8 +275,15 @@ def signin(request: HttpRequest) -> HttpResponseRedirect:
 
     request.session["login_next_url"] = next_url
 
+    logger.debug('--- session url and request ---')
+    logger.debug(next_url)
+    logger.debug(request)
+
     saml_client = get_saml_client(get_assertion_url(request), acs)
     _, info = saml_client.prepare_for_authenticate(relay_state=next_url)  # type: ignore
+
+    logger.debug('--- saml client ---')
+    logger.debug(saml_client)
 
     redirect_url = dict(info["headers"]).get("Location", "")
     return HttpResponseRedirect(redirect_url)
