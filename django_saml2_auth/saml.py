@@ -171,12 +171,23 @@ def get_saml_client(domain: str,
     # get_reverse raises an exception if the view is not found, so we can safely ignore type errors
     acs_url = domain + get_reverse([acs, "acs", "django_saml2_auth:acs"])  # type: ignore
 
+    logger.debug('--- get_saml_client acs_url ---')
+    logger.debug(user_id)
+
     get_user_id_from_saml_response = dictor(settings.SAML2_AUTH,
                                             "TRIGGER.GET_USER_ID_FROM_SAML_RESPONSE")
     if get_user_id_from_saml_response and saml_response:
         user_id = run_hook(get_user_id_from_saml_response, saml_response, user_id)  # type: ignore
 
+    logger.debug('--- get_saml_client user_id ---')
+    logger.debug(user_id)
+
+
     metadata = get_metadata(user_id)
+
+    logger.debug('--- get_saml_client metadata---')
+    logger.debug(metadata)
+
     if (metadata and (
             ("local" in metadata and not metadata["local"]) or
             ("remote" in metadata and not metadata["remote"])
@@ -230,6 +241,10 @@ def get_saml_client(domain: str,
     try:
         sp_config = Saml2Config()
         sp_config.load(saml_settings)
+
+        logger.debug('--- get_saml_client trying sp_config---')
+        logger.debug(sp_config)
+
         saml_client = Saml2Client(config=sp_config)
         return saml_client
     except Exception as exc:
