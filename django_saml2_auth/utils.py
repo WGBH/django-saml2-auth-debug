@@ -179,6 +179,10 @@ def exception_handler(
         Returns:
             HttpResponse: Either a redirect or a response with error details
         """
+        logger = logging.getLogger(__name__)
+        logging.debug('--- wrapped function ---')
+        logging.debug(function)
+        
         result = None
         try:
             result = function(request)
