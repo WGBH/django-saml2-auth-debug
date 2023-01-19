@@ -1,6 +1,9 @@
 """Utility functions for various SAML client functions.
 """
 import base64
+
+import logging
+
 from typing import Any, Callable, Dict, Mapping, Optional, Union
 
 from dictor import dictor  # type: ignore
@@ -158,6 +161,13 @@ def get_saml_client(domain: str,
     Returns:
         Optional[Saml2Client]: A Saml2Client or None
     """
+    logger = logging.getLogger(__name__)
+    logger.debug('--- get_saml_client args ---')
+    logger.debug(domain)
+    logger.debug(acs)
+    logger.debug(user_id)
+    logger.debug(saml_response)
+
     # get_reverse raises an exception if the view is not found, so we can safely ignore type errors
     acs_url = domain + get_reverse([acs, "acs", "django_saml2_auth:acs"])  # type: ignore
 
